@@ -3,29 +3,33 @@ import styled from "styled-components";
 import { BREAKPOINTS } from "../../constants";
 
 const StyledFlex = styled.div`
-  display: flex;
-  flex-direction: ${(props) =>
-    props.flexDirection ? props.flexDirection : "column"};
-  gap: ${(props) => props.gap}px;
-  align-items: ${(props) => props.alignItems};
-  justify-content: ${(props) => props.justifyContent};
-  padding: 64px;
+  ${(props) => `
+display: flex;
+  flex-direction: ${props.flexDirection ? props.flexDirection : "row"};
+  gap: ${props.gap}px;
+  align-items: ${props.alignItems};
+  justify-content: ${props.justifyContent};
+  padding: ${props.padding ? props.padding : "64px"};
+  width: ${props.width};
 
   @media (max-width: ${BREAKPOINTS.tablet}px) {
     width: auto;
   }
 
   @media (max-width: ${BREAKPOINTS.mobile}px) {
-    padding: 64px 16px;
+    flex-direction: column;
   }
+`}
 `;
-
 export default function Flex({
   className,
   flexDirection,
   gap,
   alignItems,
   justifyContent,
+  padding,
+  width,
+  float,
   children,
 }) {
   return (
@@ -35,6 +39,9 @@ export default function Flex({
       gap={gap}
       alignItems={alignItems}
       justifyContent={justifyContent}
+      padding={padding}
+      width={width}
+      float={float}
     >
       {children}
     </StyledFlex>
