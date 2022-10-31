@@ -11,6 +11,9 @@ const StyledInput = styled.input`
   border-radius: 45px;
   transition: 0.5s ease;
   margin-bottom: 16px;
+  max-width: 426px;
+  width: 100%;
+
   ::placeholder {
     color: var(--placeholder-color);
   }

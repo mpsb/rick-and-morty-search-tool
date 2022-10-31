@@ -12,6 +12,14 @@ const StyledSelect = styled.select`
   font-size: 3vh;
   transition: 0.5s ease;
   margin-bottom: 16px;
+  max-width: 426px;
+  width: 100%;
+  appearance: none;
+  background-image: url("/arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 32px center;
+  background-size: 1em;
+
   :focus {
     outline: none;
     border: 2px solid var(--secondary-color);

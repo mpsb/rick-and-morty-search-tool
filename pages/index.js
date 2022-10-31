@@ -1,6 +1,3 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import Header from "@components/text/Header";
 import Subheader from "@components/text/Subheader";
 import Input from "@components/interactive/Input";
@@ -17,7 +14,7 @@ const selectOptions = [
 export default function Home() {
   return (
     <>
-      <Flex>
+      <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <Header>Rick and Morty</Header>
         <Subheader>Character Search Tool</Subheader>
         <Input placeholder="Search for characters..." />
