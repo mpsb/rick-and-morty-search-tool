@@ -5,6 +5,7 @@ import Flex from "@components/containers/Flex";
 import Select from "@components/interactive/Select";
 import ClickableImage from "@components/media/ClickableImage";
 import Body from "@components/text/Body";
+import SearchListItem from "@components/containers/SearchListItem";
 
 const selectOptions = [
   { value: "Status", text: "Status" },
@@ -22,7 +23,7 @@ export default function Home() {
         <Flex
           flexDirection="column"
           alignItems="center"
-          padding="0px 0px 16px 0px"
+          padding="0px 0px 24px 0px"
         >
           <Body>Language:</Body>
           <Flex padding="0" gap={16}>
@@ -42,6 +43,7 @@ export default function Home() {
         </Flex>
         <Input placeholder="Search for characters..." />
         <Select options={selectOptions} />
+        <SearchListItem status="alive" imageUrl="/character-test-image.png" />
       </Flex>
     </>
   );
