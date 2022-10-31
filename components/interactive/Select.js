@@ -9,7 +9,7 @@ const StyledSelect = styled.select`
   background-color: transparent;
   font-family: Catamaran;
   color: var(--primary-color);
-  font-size: 3vh;
+  font-size: 2.5vh;
   transition: 0.5s ease;
   margin-bottom: 16px;
   max-width: 426px;

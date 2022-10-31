@@ -6,6 +6,7 @@ import Select from "@components/interactive/Select";
 import ClickableImage from "@components/media/ClickableImage";
 import Body from "@components/text/Body";
 import SearchListItem from "@components/containers/SearchListItem";
+import Button from "@components/interactive/Button";
 
 const selectOptions = [
   { value: "Status", text: "Status" },
@@ -44,6 +45,7 @@ export default function Home() {
         <Input placeholder="Search for characters..." />
         <Select options={selectOptions} />
         <SearchListItem status="alive" imageUrl="/character-test-image.png" />
+        <Button>Load more characters...</Button>
       </Flex>
     </>
   );

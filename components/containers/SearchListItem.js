@@ -15,7 +15,8 @@ const StyledStatus = styled.span`
 `}
   font-size: 2.5vh;
   margin: 0;
-  font-weight: 700;
+  font-weight: 600;
+  text-transform: uppercase;
 `;
 
 const StyledImageContainer = styled.div`
@@ -46,7 +47,9 @@ export default function SearchListItem({ status, imageUrl }) {
           <StyledImageContainer imageUrl={imageUrl} />
           <Body>Rick Sanchez</Body>
         </Flex>
-        <StyledStatus color={StatusColorMappings[status]}>ALIVE</StyledStatus>
+        <StyledStatus color={StatusColorMappings[status]}>
+          {status}
+        </StyledStatus>
       </Flex>
     </StyledSearchListItem>
   );

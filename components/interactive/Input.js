@@ -7,7 +7,7 @@ const StyledInput = styled.input`
   background-color: transparent;
   font-family: Catamaran;
   color: var(--primary-color);
-  font-size: 3vh;
+  font-size: 2.5vh;
   border-radius: 45px;
   transition: 0.5s ease;
   margin-bottom: 16px;
