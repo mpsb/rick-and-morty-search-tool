@@ -1,0 +1,39 @@
+import React from "react";
+import styled from "styled-components";
+
+const StyledSelect = styled.select`
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+  border-radius: 45px;
+  padding: 16px 32px;
+  background-color: transparent;
+  font-family: Catamaran;
+  color: var(--primary-color);
+  font-size: 3vh;
+  transition: 0.5s ease;
+  margin-bottom: 16px;
+  :focus {
+    outline: none;
+    border: 2px solid var(--secondary-color);
+  }
+  :hover {
+    border: 2px solid var(--secondary-color);
+  }
+`;
+
+const StyledOption = styled.option`
+  padding: 8px;
+  border: 2px solid var(--primary-color);
+`;
+
+export default function Select({ options, handleChange, value }) {
+  return (
+    <StyledSelect aria-label="dropdown" value={value} onChange={handleChange}>
+      {options.map((option, index) => (
+        <StyledOption value={option.value} key={`${option.value}-${index}`}>
+          {option.text}
+        </StyledOption>
+      ))}
+    </StyledSelect>
+  );
+}
