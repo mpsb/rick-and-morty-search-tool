@@ -28,6 +28,7 @@ const StyledImageContainer = styled.div`
   ${(props) => `
     background: url(${props.imageUrl});
 `}
+  background-size: contain;
 `;
 
 const StatusColorMappings = {
@@ -36,7 +37,7 @@ const StatusColorMappings = {
   unknown: "#969696",
 };
 
-export default function SearchListItem({ status, imageUrl }) {
+export default function SearchListItem({ status, imageUrl, name }) {
   return (
     <StyledSearchListItem>
       <Flex
@@ -46,7 +47,7 @@ export default function SearchListItem({ status, imageUrl }) {
       >
         <Flex padding="0" gap={16} alignItems="center">
           <StyledImageContainer imageUrl={imageUrl} />
-          <Body>Rick Sanchez</Body>
+          <Body>{name}</Body>
         </Flex>
         <StyledStatus color={StatusColorMappings[status]}>
           {status}

@@ -7,6 +7,8 @@ import ClickableImage from "@components/media/ClickableImage";
 import Body from "@components/text/Body";
 import SearchListItem from "@components/containers/SearchListItem";
 import Button from "@components/interactive/Button";
+import { gql } from "@apollo/client";
+import client from "@apollo-client";
 
 const selectOptions = [
   { value: "Status", text: "Status" },
@@ -15,7 +17,9 @@ const selectOptions = [
   { value: "Unknown", text: "Unknown" },
 ];
 
-export default function Home() {
+export default function Home({ initialData }) {
+  console.log(initialData);
+
   return (
     <>
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
@@ -44,9 +48,39 @@ export default function Home() {
         </Flex>
         <Input placeholder="Search for characters..." />
         <Select options={selectOptions} />
-        <SearchListItem status="alive" imageUrl="/character-test-image.png" />
+        {initialData.map((character) => (
+          <SearchListItem
+            key={character.id}
+            name={character.name}
+            status={character.status}
+            imageUrl={character.image}
+          />
+        ))}
         <Button>Load more characters...</Button>
       </Flex>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        characters(page: 1) {
+          results {
+            id
+            name
+            status
+            image
+          }
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      initialData: data.characters.results,
+    },
+  };
 }

@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
-      "@constants": ["constants/index.js"]
+      "@constants": ["constants/index.js"],
+      "@apollo-client": ["apollo-client.js"]
     }
   }
 }
