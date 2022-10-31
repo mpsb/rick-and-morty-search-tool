@@ -7,6 +7,7 @@ const StyledSearchListItem = styled.div`
   border: 2px solid var(--primary-color);
   border-radius: 16px;
   width: 100%;
+  margin-bottom: 16px;
 `;
 
 const StyledStatus = styled.span`

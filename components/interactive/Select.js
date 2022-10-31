@@ -11,7 +11,7 @@ const StyledSelect = styled.select`
   color: var(--primary-color);
   font-size: 2.5vh;
   transition: 0.5s ease;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   max-width: 426px;
   width: 100%;
   appearance: none;
