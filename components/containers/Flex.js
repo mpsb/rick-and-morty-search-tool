@@ -9,8 +9,14 @@ const StyledFlex = styled.div`
   gap: ${(props) => props.gap}px;
   align-items: ${(props) => props.alignItems};
   justify-content: ${(props) => props.justifyContent};
+  padding: 64px;
+
   @media (max-width: ${BREAKPOINTS.tablet}px) {
     width: auto;
+  }
+
+  @media (max-width: ${BREAKPOINTS.mobile}px) {
+    padding: 64px 16px;
   }
 `;
 
