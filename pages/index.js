@@ -10,6 +10,7 @@ import ClickableImage from "@components/media/ClickableImage";
 import Body from "@components/text/Body";
 import SearchListItem from "@components/containers/SearchListItem";
 import Button from "@components/interactive/Button";
+import LoadingIndicator from "@components/containers/LoadingIndicator";
 
 const selectOptions = [
   { value: "", text: "Status" },
@@ -89,6 +90,7 @@ export default function Home({ initialData }) {
 
   return (
     <>
+      {loading ? <LoadingIndicator /> : null}
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <Header>Rick and Morty</Header>
         <Subheader>Character Search Tool</Subheader>
@@ -118,21 +120,18 @@ export default function Home({ initialData }) {
           handleChange={handleNameChange}
         />
         <Select options={selectOptions} handleChange={handleStatusChange} />
-        {queryResult?.map((character, index) => (
-          <SearchListItem
-            key={`${character?.id}-${index}`}
-            name={character?.name}
-            status={character?.status}
-            imageUrl={character?.image}
-          />
-        ))}
-        {loading ? (
-          <Subheader>Loading...</Subheader>
-        ) : error ? (
-          <Subheader>Error occurred.</Subheader>
-        ) : queryResult === undefined || queryResult?.length === 0 ? (
-          <Subheader>No results found.</Subheader>
-        ) : null}
+        {queryResult?.length === 0 ? (
+          <Body>No results found.</Body>
+        ) : (
+          queryResult?.map((character, index) => (
+            <SearchListItem
+              key={`${character?.id}-${index}`}
+              name={character?.name}
+              status={character?.status}
+              imageUrl={character?.image}
+            />
+          ))
+        )}
         {paginationOptions?.next >= paginationOptions?.pages ||
         paginationOptions?.next === null ? null : (
           <Button handleButtonClick={handleButtonClick}>
