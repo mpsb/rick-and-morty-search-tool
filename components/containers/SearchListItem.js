@@ -32,8 +32,8 @@ const StyledImageContainer = styled.div`
 `;
 
 const StatusColorMappings = {
-  alive: "#1EC02F",
-  dead: "#C01E1E",
+  Alive: "#1EC02F",
+  Dead: "#C01E1E",
   unknown: "#969696",
 };
 

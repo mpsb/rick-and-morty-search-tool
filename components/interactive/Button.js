@@ -13,6 +13,7 @@ const StyledButton = styled.button`
   max-width: 426px;
   width: 100%;
   cursor: pointer;
+  margin-top: 32px;
 `;
 
 export default function Button({ children }) {

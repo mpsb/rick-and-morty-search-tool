@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+import client from "@apollo-client";
 import Header from "@components/text/Header";
 import Subheader from "@components/text/Subheader";
 import Input from "@components/interactive/Input";
@@ -7,18 +10,60 @@ import ClickableImage from "@components/media/ClickableImage";
 import Body from "@components/text/Body";
 import SearchListItem from "@components/containers/SearchListItem";
 import Button from "@components/interactive/Button";
-import { gql } from "@apollo/client";
-import client from "@apollo-client";
 
 const selectOptions = [
-  { value: "Status", text: "Status" },
+  { value: "", text: "Status" },
   { value: "Alive", text: "Alive" },
   { value: "Dead", text: "Dead" },
-  { value: "Unknown", text: "Unknown" },
+  { value: "unknown", text: "Unknown" },
 ];
 
+const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
+  query Character($characterName: String!, $status: String!) {
+    characters(page: 1, filter: { name: $characterName, status: $status }) {
+      results {
+        name
+        status
+        image
+      }
+      info {
+        count
+        pages
+        next
+      }
+    }
+  }
+`;
+
 export default function Home({ initialData }) {
-  console.log(initialData);
+  const [shownData, setShownData] = useState([]);
+  const [nameToSearch, setNameToSearch] = useState("");
+  const [statusToSearch, setStatusToSearch] = useState("");
+
+  const { loading, error, data } = useQuery(GET_CHARACTERS_BY_NAME_AND_STATUS, {
+    variables: {
+      characterName: nameToSearch,
+      status: statusToSearch,
+    },
+    client: client,
+  });
+
+  function handleNameChange(event) {
+    setNameToSearch(event.target.value);
+  }
+
+  function handleStatusChange(event) {
+    setStatusToSearch(event.target.value);
+  }
+
+  useEffect(() => {
+    setShownData(initialData);
+  }, [initialData]);
+
+  useEffect(() => {
+    console.log(data);
+    setShownData(data?.characters.results);
+  }, [data]);
 
   return (
     <>
@@ -46,16 +91,23 @@ export default function Home({ initialData }) {
             />
           </Flex>
         </Flex>
-        <Input placeholder="Search for characters..." />
-        <Select options={selectOptions} />
-        {initialData.map((character) => (
-          <SearchListItem
-            key={character.id}
-            name={character.name}
-            status={character.status}
-            imageUrl={character.image}
-          />
-        ))}
+        <Input
+          placeholder="Search for characters..."
+          handleChange={handleNameChange}
+        />
+        <Select options={selectOptions} handleChange={handleStatusChange} />
+        {shownData ? (
+          shownData.map((character) => (
+            <SearchListItem
+              key={character.id}
+              name={character.name}
+              status={character.status}
+              imageUrl={character.image}
+            />
+          ))
+        ) : (
+          <Subheader>Loading characters...</Subheader>
+        )}
         <Button>Load more characters...</Button>
       </Flex>
     </>
