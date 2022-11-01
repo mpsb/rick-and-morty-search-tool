@@ -16,6 +16,6 @@ const StyledButton = styled.button`
   margin-top: 32px;
 `;
 
-export default function Button({ children }) {
-  return <StyledButton>{children}</StyledButton>;
+export default function Button({ children, handleButtonClick }) {
+  return <StyledButton onClick={handleButtonClick}>{children}</StyledButton>;
 }

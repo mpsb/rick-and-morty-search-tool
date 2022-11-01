@@ -19,8 +19,8 @@ const selectOptions = [
 ];
 
 const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
-  query Character($characterName: String!, $status: String!) {
-    characters(page: 1, filter: { name: $characterName, status: $status }) {
+  query Character($characterName: String!, $status: String!, $page: Int!) {
+    characters(page: $page, filter: { name: $characterName, status: $status }) {
       results {
         name
         status
@@ -36,14 +36,17 @@ const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
 `;
 
 export default function Home({ initialData }) {
-  const [shownData, setShownData] = useState([]);
+  const [queryResult, setQueryResult] = useState([]);
+  const [paginationOptions, setPaginationOptions] = useState({});
   const [nameToSearch, setNameToSearch] = useState("");
   const [statusToSearch, setStatusToSearch] = useState("");
+  const [page, setPage] = useState(1);
 
   const { loading, error, data } = useQuery(GET_CHARACTERS_BY_NAME_AND_STATUS, {
     variables: {
       characterName: nameToSearch,
       status: statusToSearch,
+      page: page,
     },
     client: client,
   });
@@ -56,14 +59,33 @@ export default function Home({ initialData }) {
     setStatusToSearch(event.target.value);
   }
 
+  function handleButtonClick() {
+    if (paginationOptions.next < paginationOptions.pages) {
+      setPage(page + 1);
+    }
+  }
+
   useEffect(() => {
-    setShownData(initialData);
+    setQueryResult(initialData.characters.results);
+    setPaginationOptions(initialData.characters.info);
   }, [initialData]);
 
   useEffect(() => {
-    console.log(data);
-    setShownData(data?.characters.results);
-  }, [data]);
+    if (loading) return;
+    if (page > 1) {
+      setQueryResult((queryResult) =>
+        queryResult.concat(data?.characters.results)
+      );
+      setPaginationOptions(data?.characters.info);
+    } else {
+      setQueryResult(data?.characters.results);
+      setPaginationOptions(data?.characters.info);
+    }
+  }, [page, data, loading]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [statusToSearch, nameToSearch]);
 
   return (
     <>
@@ -96,25 +118,33 @@ export default function Home({ initialData }) {
           handleChange={handleNameChange}
         />
         <Select options={selectOptions} handleChange={handleStatusChange} />
-        {shownData ? (
-          shownData.map((character) => (
-            <SearchListItem
-              key={character.id}
-              name={character.name}
-              status={character.status}
-              imageUrl={character.image}
-            />
-          ))
-        ) : (
-          <Subheader>Loading characters...</Subheader>
+        {queryResult?.map((character, index) => (
+          <SearchListItem
+            key={`${character?.id}-${index}`}
+            name={character?.name}
+            status={character?.status}
+            imageUrl={character?.image}
+          />
+        ))}
+        {loading ? (
+          <Subheader>Loading...</Subheader>
+        ) : error ? (
+          <Subheader>Error occurred.</Subheader>
+        ) : queryResult === undefined || queryResult?.length === 0 ? (
+          <Subheader>No results found.</Subheader>
+        ) : null}
+        {paginationOptions?.next >= paginationOptions?.pages ||
+        paginationOptions?.next === null ? null : (
+          <Button handleButtonClick={handleButtonClick}>
+            Load more characters...
+          </Button>
         )}
-        <Button>Load more characters...</Button>
       </Flex>
     </>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
       query {
@@ -125,6 +155,11 @@ export async function getStaticProps() {
             status
             image
           }
+          info {
+            count
+            pages
+            next
+          }
         }
       }
     `,
@@ -132,7 +167,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      initialData: data.characters.results,
+      initialData: data,
     },
   };
 }
