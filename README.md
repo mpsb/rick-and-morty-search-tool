@@ -1,7 +1,7 @@
 # Rick and Morty Search Tool
 
 ## Prerequisites
-Please make sure you have `yarn` installed in your system. If not, please follow the installation steps in this [link.](https://classic.yarnpkg.com/lang/en/docs/install/)
+Please make sure you have the `yarn` package installed in your system. If not, please follow the installation steps in this [link.](https://classic.yarnpkg.com/lang/en/docs/install/) After installation, you can follow the steps below to run the site locally.
 
 ## How to run the site locally
 
