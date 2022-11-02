@@ -40,7 +40,7 @@ const StyledImageContainer = styled.div`
 const StatusColorMappings = {
   Alive: "#1EC02F",
   Dead: "#C01E1E",
-  unknown: "#969696",
+  Unknown: "#969696",
   Viva: "#1EC02F",
   Muerta: "#C01E1E",
   Desconocida: "#969696",
