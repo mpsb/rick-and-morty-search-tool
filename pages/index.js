@@ -32,8 +32,7 @@ const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
 `;
 
 export default function Home({ initialData }) {
-  const { userLanguage, dictionary, setUserLanguage } =
-    useContext(LanguageContext);
+  const { dictionary, setUserLanguage } = useContext(LanguageContext);
 
   const [queryResult, setQueryResult] = useState([]);
   const [paginationOptions, setPaginationOptions] = useState({});
@@ -99,7 +98,9 @@ export default function Home({ initialData }) {
 
   return (
     <>
-      {loading ? <LoadingIndicator /> : null}
+      {loading ? (
+        <LoadingIndicator loadingDescription={dictionary["loading"]} />
+      ) : null}
       <ScrollToTopButton>{dictionary["scrollToTop"]}</ScrollToTopButton>
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <Header>Rick and Morty</Header>
@@ -138,7 +139,6 @@ export default function Home({ initialData }) {
           <Body tid="noResultsFound" />
         ) : (
           queryResult?.map((character, index) => {
-            console.log(character?.status, dictionary[character?.status]);
             return (
               <SearchListItem
                 key={`${character?.id}-${index}`}

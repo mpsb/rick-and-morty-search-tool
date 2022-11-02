@@ -15,10 +15,10 @@ const StyledLoadingIndicator = styled.div`
   border-radius: 16px;
 `;
 
-export default function LoadingIndicator() {
+export default function LoadingIndicator({ loadingDescription }) {
   return (
     <StyledLoadingIndicator>
-      <Body>Loading...</Body>
+      <Body>{loadingDescription}</Body>
     </StyledLoadingIndicator>
   );
 }
