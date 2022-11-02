@@ -9,7 +9,7 @@ Please make sure you have the `yarn` package installed in your system. If not, p
 1. Run `yarn install` to install the required dependencies.
 2. Run `yarn dev` and go to `localhost:3000` on your browser.
 
-## How to run tests
+## How to run E2E tests
 
 1. Run `yarn install` to install the required dependencies.
 2. Run `yarn cypress:run` to run Cypress tests on the command line.
