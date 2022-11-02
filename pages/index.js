@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import client from "@apollo-client";
-import Header from "@components/text/Header";
-import Subheader from "@components/text/Subheader";
-import Input from "@components/interactive/Input";
-import Flex from "@components/containers/Flex";
-import Select from "@components/interactive/Select";
+import { Flex, LoadingIndicator, SearchListItem } from "@components/containers";
+import {
+  Button,
+  Input,
+  ScrollToTopButton,
+  Select,
+} from "@components/interactive";
+import { Body, Header, Subheader } from "@components/text";
 import ClickableImage from "@components/media/ClickableImage";
-import Body from "@components/text/Body";
-import SearchListItem from "@components/containers/SearchListItem";
-import Button from "@components/interactive/Button";
-import LoadingIndicator from "@components/containers/LoadingIndicator";
-import ScrollToTopButton from "@components/interactive/ScrollToTopButton";
 import { LanguageContext } from "contexts";
 
 const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`

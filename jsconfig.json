@@ -3,6 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@components/containers": ["components/containers/index.js"],
+      "@components/interactive": ["components/interactive/index.js"],
+      "@components/text": ["components/text/index.js"],
       "@constants": ["constants/index.js"],
       "@apollo-client": ["apollo-client.js"]
     }
