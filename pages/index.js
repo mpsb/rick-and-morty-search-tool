@@ -11,6 +11,7 @@ import Body from "@components/text/Body";
 import SearchListItem from "@components/containers/SearchListItem";
 import Button from "@components/interactive/Button";
 import LoadingIndicator from "@components/containers/LoadingIndicator";
+import ScrollToTopButton from "@components/interactive/ScrollToTopButton";
 
 const selectOptions = [
   { value: "", text: "Status" },
@@ -91,6 +92,7 @@ export default function Home({ initialData }) {
   return (
     <>
       {loading ? <LoadingIndicator /> : null}
+      <ScrollToTopButton>Scroll to top</ScrollToTopButton>
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <Header>Rick and Morty</Header>
         <Subheader>Character Search Tool</Subheader>
