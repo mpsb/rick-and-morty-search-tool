@@ -30,6 +30,7 @@ const StyledScrollToTopButton = styled.button`
 export default function ScrollToTopButton({ children }) {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
+  // scroll to top when button is clicked
   function handleButtonClick() {
     window.scrollTo({
       top: 0,
@@ -37,6 +38,7 @@ export default function ScrollToTopButton({ children }) {
     });
   }
 
+  // useEffect for making the button appear when scroll position is not in initial position
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 0) {

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import styled from "styled-components";
 import Flex from "@components/containers/Flex";
 import Body from "@components/text/Body";
@@ -26,24 +27,14 @@ const StyledStatus = styled.span`
   text-transform: uppercase;
 `;
 
-const StyledImageContainer = styled.div`
-  border: 2px solid #000000;
-  border-radius: 45px;
-  width: 70px;
-  height: 70px;
-  ${(props) => `
-    background: url(${props.imageUrl});
-`}
-  background-size: contain;
-`;
-
+// go to globals.css to check root variables
 const StatusColorMappings = {
-  Alive: "#12801D",
-  Dead: "#C01E1E",
-  Unknown: "#4D4D4D",
-  Viva: "#12801D",
-  Muerta: "#C01E1E",
-  Desconocida: "#4D4D4D",
+  Alive: "var(--green)",
+  Dead: "var(--red)",
+  Unknown: "var(--grey)",
+  Viva: "var(--green)",
+  Muerta: "var(--red)",
+  Desconocida: "var(--grey)",
 };
 
 export default function SearchListItem({ status, imageUrl, name }) {
@@ -55,7 +46,13 @@ export default function SearchListItem({ status, imageUrl, name }) {
         justifyContent="space-between"
       >
         <Flex padding="0" gap={16} alignItems="center">
-          <StyledImageContainer imageUrl={imageUrl} />
+          <Image
+            className="avatar-image"
+            src={imageUrl}
+            width={70}
+            height={70}
+            alt={`Avatar of ${name}.`}
+          />
           <Body>{name}</Body>
         </Flex>
         <StyledStatus color={StatusColorMappings[status]}>

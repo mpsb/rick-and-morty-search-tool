@@ -9,6 +9,14 @@ const nextConfig = {
     locales: ["en", "es"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "rickandmortyapi.com",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
