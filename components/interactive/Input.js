@@ -13,6 +13,7 @@ const StyledInput = styled.input`
   margin: 24px 0px;
   max-width: 426px;
   width: 100%;
+  will-change: border;
 
   ::placeholder {
     color: var(--placeholder-color);

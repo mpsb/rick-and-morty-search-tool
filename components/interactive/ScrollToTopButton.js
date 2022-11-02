@@ -19,6 +19,7 @@ const StyledScrollToTopButton = styled.button`
   padding: 8px 24px;
   z-index: 2;
   transition: 0.2s ease;
+  will-change: transform background-color border;
 
   :hover {
     transform: perspective(100px) translateZ(2px);

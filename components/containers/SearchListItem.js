@@ -11,6 +11,7 @@ const StyledSearchListItem = styled.div`
   max-width: 1024px;
   margin-bottom: 16px;
   transition: 0.2s ease;
+  will-change: transform;
 
   :hover {
     transform: perspective(100px) translateZ(5px);

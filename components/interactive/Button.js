@@ -15,6 +15,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   margin-top: 32px;
   transition: 0.2s ease;
+  will-change: transform background-color border;
 
   :hover {
     transform: perspective(100px) translateZ(2px);

@@ -19,6 +19,7 @@ const StyledSelect = styled.select`
   background-repeat: no-repeat;
   background-position: right 32px center;
   background-size: 1em;
+  will-change: opacity;
 
   :focus {
     opacity: 0.7;

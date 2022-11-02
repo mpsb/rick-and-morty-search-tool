@@ -11,7 +11,6 @@ const StyledLoadingIndicator = styled.div`
   z-index: 2;
   background-color: white;
   padding: 32px;
-  transition: 0.2s ease;
   border-radius: 16px;
 `;
 
