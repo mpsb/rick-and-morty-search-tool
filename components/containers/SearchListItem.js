@@ -5,13 +5,13 @@ import Flex from "@components/containers/Flex";
 import Body from "@components/text/Body";
 
 const StyledSearchListItem = styled.div`
+  will-change: transform;
   border: 2px solid var(--primary-color);
   border-radius: 16px;
   width: 100%;
   max-width: 1024px;
   margin-bottom: 16px;
   transition: 0.2s ease;
-  will-change: transform;
 
   :hover {
     transform: perspective(100px) translateZ(5px);

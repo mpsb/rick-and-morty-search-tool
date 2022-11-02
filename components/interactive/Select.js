@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
+  will-change: opacity;
+
   cursor: pointer;
   border: 2px solid var(--primary-color);
   border-radius: 45px;
@@ -19,7 +21,6 @@ const StyledSelect = styled.select`
   background-repeat: no-repeat;
   background-position: right 32px center;
   background-size: 1em;
-  will-change: opacity;
 
   :focus {
     opacity: 0.7;
