@@ -7,6 +7,7 @@ const StyledSearchListItem = styled.div`
   border: 2px solid var(--primary-color);
   border-radius: 16px;
   width: 100%;
+  max-width: 1024px;
   margin-bottom: 16px;
 `;
 
@@ -35,6 +36,9 @@ const StatusColorMappings = {
   Alive: "#1EC02F",
   Dead: "#C01E1E",
   unknown: "#969696",
+  Viva: "#1EC02F",
+  Muerta: "#C01E1E",
+  Desconocida: "#969696",
 };
 
 export default function SearchListItem({ status, imageUrl, name }) {

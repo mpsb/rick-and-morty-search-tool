@@ -1,0 +1,13 @@
+{
+  "characterSearchTool": "Character Search Tool",
+  "language": "Language:",
+  "searchForCharacters": "Search for characters...",
+  "status": "Status",
+  "Alive": "Alive",
+  "Dead": "Dead",
+  "unknown": "Unknown",
+  "loadMoreCharacters": "Load more characters...",
+  "loading": "Loading...",
+  "noResultsFound": "No results found.",
+  "scrollToTop": "Scroll to top"
+}

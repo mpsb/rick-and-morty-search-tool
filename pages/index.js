@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import client from "@apollo-client";
 import Header from "@components/text/Header";
@@ -12,13 +12,7 @@ import SearchListItem from "@components/containers/SearchListItem";
 import Button from "@components/interactive/Button";
 import LoadingIndicator from "@components/containers/LoadingIndicator";
 import ScrollToTopButton from "@components/interactive/ScrollToTopButton";
-
-const selectOptions = [
-  { value: "", text: "Status" },
-  { value: "Alive", text: "Alive" },
-  { value: "Dead", text: "Dead" },
-  { value: "unknown", text: "Unknown" },
-];
+import { LanguageContext } from "contexts";
 
 const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
   query Character($characterName: String!, $status: String!, $page: Int!) {
@@ -38,6 +32,9 @@ const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
 `;
 
 export default function Home({ initialData }) {
+  const { userLanguage, dictionary, setUserLanguage } =
+    useContext(LanguageContext);
+
   const [queryResult, setQueryResult] = useState([]);
   const [paginationOptions, setPaginationOptions] = useState({});
   const [nameToSearch, setNameToSearch] = useState("");
@@ -53,6 +50,13 @@ export default function Home({ initialData }) {
     client: client,
   });
 
+  const selectOptions = [
+    { value: "", text: dictionary["status"] },
+    { value: "Alive", text: dictionary["Alive"] },
+    { value: "Dead", text: dictionary["Dead"] },
+    { value: "unknown", text: dictionary["unknown"] },
+  ];
+
   function handleNameChange(event) {
     setNameToSearch(event.target.value);
   }
@@ -65,6 +69,10 @@ export default function Home({ initialData }) {
     if (paginationOptions.next < paginationOptions.pages) {
       setPage(page + 1);
     }
+  }
+
+  function handleFlagClick(event) {
+    setUserLanguage(event.target.getAttribute("value"));
   }
 
   useEffect(() => {
@@ -92,52 +100,59 @@ export default function Home({ initialData }) {
   return (
     <>
       {loading ? <LoadingIndicator /> : null}
-      <ScrollToTopButton>Scroll to top</ScrollToTopButton>
+      <ScrollToTopButton>{dictionary["scrollToTop"]}</ScrollToTopButton>
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <Header>Rick and Morty</Header>
-        <Subheader>Character Search Tool</Subheader>
+        <Subheader>{dictionary["characterSearchTool"]}</Subheader>
         <Flex
           flexDirection="column"
           alignItems="center"
           padding="0px 0px 24px 0px"
         >
-          <Body>Language:</Body>
+          <Body>{dictionary["language"]}</Body>
           <Flex padding="0" gap={16}>
             <ClickableImage
               src="/us-flag.svg"
               width={32}
               height={32}
               alt="US Flag. Click to change language to English."
+              onClick={handleFlagClick}
+              value="en"
             />
             <ClickableImage
               src="/spain-flag.svg"
               width={32}
               height={32}
               alt="Spanish Flag. Click to change language to Spanish."
+              onClick={handleFlagClick}
+              value="es"
             />
           </Flex>
         </Flex>
         <Input
-          placeholder="Search for characters..."
+          placeholder={dictionary["searchForCharacters"]}
           handleChange={handleNameChange}
         />
         <Select options={selectOptions} handleChange={handleStatusChange} />
         {queryResult?.length === 0 ? (
-          <Body>No results found.</Body>
+          <Body tid="noResultsFound" />
         ) : (
-          queryResult?.map((character, index) => (
-            <SearchListItem
-              key={`${character?.id}-${index}`}
-              name={character?.name}
-              status={character?.status}
-              imageUrl={character?.image}
-            />
-          ))
+          queryResult?.map((character, index) => {
+            console.log(character?.status, dictionary[character?.status]);
+            return (
+              <SearchListItem
+                key={`${character?.id}-${index}`}
+                name={character?.name}
+                status={dictionary[character?.status]}
+                imageUrl={character?.image}
+              />
+            );
+          })
         )}
         {paginationOptions?.next >= paginationOptions?.pages ||
         paginationOptions?.next === null ? null : (
           <Button handleButtonClick={handleButtonClick}>
-            Load more characters...
+            {dictionary["loadMoreCharacters"]}
           </Button>
         )}
       </Flex>
