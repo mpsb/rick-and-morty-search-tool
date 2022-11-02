@@ -1,5 +1,11 @@
 # Rick and Morty Search Tool
 
+## Live site
+
+This search tool has been deployed on Vercel with this link: 
+[https://rick-and-morty-search-tool.vercel.app/](https://rick-and-morty-search-tool.vercel.app/)
+
+
 ## Prerequisites
 
 Please make sure you have the `yarn` package installed in your system. If not, please follow the installation steps in this [link.](https://classic.yarnpkg.com/lang/en/docs/install/) After installation, you can follow the steps below to run the site locally.
