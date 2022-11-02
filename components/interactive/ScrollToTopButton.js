@@ -17,6 +17,14 @@ const StyledScrollToTopButton = styled.button`
   max-width: 320px;
   cursor: pointer;
   padding: 8px 24px;
+  z-index: 2;
+  transition: 0.2s ease;
+
+  :hover {
+    transform: perspective(100px) translateZ(2px);
+    background-color: var(--grey);
+    border: 2px solid var(--grey);
+  }
 `;
 
 export default function ScrollToTopButton({ children }) {

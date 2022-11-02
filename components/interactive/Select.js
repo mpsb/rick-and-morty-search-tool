@@ -21,11 +21,10 @@ const StyledSelect = styled.select`
   background-size: 1em;
 
   :focus {
-    outline: none;
-    border: 2px solid var(--secondary-color);
+    opacity: 0.7;
   }
   :hover {
-    border: 2px solid var(--secondary-color);
+    opacity: 0.7;
   }
 `;
 

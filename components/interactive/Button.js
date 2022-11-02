@@ -14,6 +14,13 @@ const StyledButton = styled.button`
   width: 100%;
   cursor: pointer;
   margin-top: 32px;
+  transition: 0.2s ease;
+
+  :hover {
+    transform: perspective(100px) translateZ(2px);
+    background-color: var(--grey);
+    border: 2px solid var(--grey);
+  }
 `;
 
 export default function Button({ children, handleButtonClick }) {

@@ -19,10 +19,10 @@ const StyledInput = styled.input`
   }
   :focus {
     outline: none;
-    border: 2px solid var(--secondary-color);
+    border: 2px solid var(--grey);
   }
   :hover {
-    border: 2px solid var(--secondary-color);
+    border: 2px solid var(--grey);
   }
 `;
 

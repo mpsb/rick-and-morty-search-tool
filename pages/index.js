@@ -40,7 +40,7 @@ export default function Home({ initialData }) {
   const [statusToSearch, setStatusToSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { loading, error, data } = useQuery(GET_CHARACTERS_BY_NAME_AND_STATUS, {
+  const { loading, data } = useQuery(GET_CHARACTERS_BY_NAME_AND_STATUS, {
     variables: {
       characterName: nameToSearch,
       status: statusToSearch,
@@ -136,7 +136,7 @@ export default function Home({ initialData }) {
         />
         <Select options={selectOptions} handleChange={handleStatusChange} />
         {queryResult?.length === 0 ? (
-          <Body tid="noResultsFound" />
+          <Body>{dictionary["noResultsFound"]}</Body>
         ) : (
           queryResult?.map((character, index) => {
             return (

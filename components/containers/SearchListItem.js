@@ -9,6 +9,11 @@ const StyledSearchListItem = styled.div`
   width: 100%;
   max-width: 1024px;
   margin-bottom: 16px;
+  transition: 0.2s ease;
+
+  :hover {
+    transform: perspective(100px) translateZ(5px);
+  }
 `;
 
 const StyledStatus = styled.span`
