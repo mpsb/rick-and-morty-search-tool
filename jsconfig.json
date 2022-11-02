@@ -7,7 +7,8 @@
       "@components/interactive": ["components/interactive/index.js"],
       "@components/text": ["components/text/index.js"],
       "@constants": ["constants/index.js"],
-      "@apollo-client": ["apollo-client.js"]
+      "@apollo-client": ["apollo-client.js"],
+      "@styles/*": ["styles/*"]
     }
   }
 }

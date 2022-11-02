@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import client from "@apollo-client";
-import { Flex, LoadingIndicator, SearchListItem } from "@components/containers";
+import { Flex, LoadingIndicator } from "@components/containers";
 import {
   Button,
   Input,
@@ -11,6 +11,12 @@ import {
 import { Body, Header, Subheader } from "@components/text";
 import ClickableImage from "@components/media/ClickableImage";
 import { LanguageContext } from "contexts";
+import Head from "next/head";
+
+// lazy loading
+const SearchListItem = React.lazy(() =>
+  import("@components/containers/SearchListItem")
+);
 
 const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
   query Character($characterName: String!, $status: String!, $page: Int!) {
@@ -101,6 +107,14 @@ export default function Home({ initialData }) {
 
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com/" />
+        <title>Rick and Morty Character Search Tool</title>
+        <meta
+          name="description"
+          content="Tool for searching up Rick and Morty characters by name and status."
+        />
+      </Head>
       {loading ? (
         <LoadingIndicator loadingDescription={dictionary["loading"]} />
       ) : null}
@@ -148,12 +162,16 @@ export default function Home({ initialData }) {
         ) : (
           queryResult?.map((character, index) => {
             return (
-              <SearchListItem
+              <Suspense
+                fallback={<div></div>}
                 key={`${character?.id}-${index}`}
-                name={character?.name}
-                status={dictionary[character?.status]}
-                imageUrl={character?.image}
-              />
+              >
+                <SearchListItem
+                  name={character?.name}
+                  status={dictionary[character?.status]}
+                  imageUrl={character?.image}
+                />
+              </Suspense>
             );
           })
         )}

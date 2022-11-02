@@ -38,12 +38,12 @@ const StyledImageContainer = styled.div`
 `;
 
 const StatusColorMappings = {
-  Alive: "#1EC02F",
+  Alive: "#12801D",
   Dead: "#C01E1E",
-  Unknown: "#969696",
-  Viva: "#1EC02F",
+  Unknown: "#4D4D4D",
+  Viva: "#12801D",
   Muerta: "#C01E1E",
-  Desconocida: "#969696",
+  Desconocida: "#4D4D4D",
 };
 
 export default function SearchListItem({ status, imageUrl, name }) {
