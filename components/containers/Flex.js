@@ -17,7 +17,8 @@ display: flex;
   }
 
   @media (max-width: ${BREAKPOINTS.mobile}px) {
-    flex-direction: column;
+    flex-direction: ${props.fixFlexDirection ? props.flexDirection : "column"};
+    padding: 16px;
   }
 `}
 `;
@@ -29,7 +30,7 @@ export default function Flex({
   justifyContent,
   padding,
   width,
-  float,
+  fixFlexDirection,
   children,
 }) {
   return (
@@ -41,7 +42,7 @@ export default function Flex({
       justifyContent={justifyContent}
       padding={padding}
       width={width}
-      float={float}
+      fixFlexDirection={fixFlexDirection}
     >
       {children}
     </StyledFlex>

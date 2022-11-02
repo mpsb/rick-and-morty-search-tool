@@ -49,6 +49,7 @@ export default function Home({ initialData }) {
     client: client,
   });
 
+  // options for the status dropdown
   const selectOptions = [
     { value: "", text: dictionary["status"] },
     { value: "Alive", text: dictionary["Alive"] },
@@ -102,34 +103,39 @@ export default function Home({ initialData }) {
         <LoadingIndicator loadingDescription={dictionary["loading"]} />
       ) : null}
       <ScrollToTopButton>{dictionary["scrollToTop"]}</ScrollToTopButton>
-      <Flex flexDirection="column" alignItems="center" justifyContent="center">
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        padding="64px 0px 24px 0px"
+      >
+        <Body>{dictionary["language"]}</Body>
+        <Flex padding="0" gap={16} flexDirection="row" fixFlexDirection>
+          <ClickableImage
+            src="/us-flag.svg"
+            width={32}
+            height={32}
+            alt="US Flag. Click to change language to English."
+            onClick={handleFlagClick}
+            value="en"
+          />
+          <ClickableImage
+            src="/spain-flag.svg"
+            width={32}
+            height={32}
+            alt="Spanish Flag. Click to change language to Spanish."
+            onClick={handleFlagClick}
+            value="es"
+          />
+        </Flex>
+      </Flex>
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        padding="0px 64px 64px"
+      >
         <Header>Rick and Morty</Header>
         <Subheader>{dictionary["characterSearchTool"]}</Subheader>
-        <Flex
-          flexDirection="column"
-          alignItems="center"
-          padding="0px 0px 24px 0px"
-        >
-          <Body>{dictionary["language"]}</Body>
-          <Flex padding="0" gap={16}>
-            <ClickableImage
-              src="/us-flag.svg"
-              width={32}
-              height={32}
-              alt="US Flag. Click to change language to English."
-              onClick={handleFlagClick}
-              value="en"
-            />
-            <ClickableImage
-              src="/spain-flag.svg"
-              width={32}
-              height={32}
-              alt="Spanish Flag. Click to change language to Spanish."
-              onClick={handleFlagClick}
-              value="es"
-            />
-          </Flex>
-        </Flex>
         <Input
           placeholder={dictionary["searchForCharacters"]}
           handleChange={handleNameChange}

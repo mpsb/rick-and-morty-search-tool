@@ -10,7 +10,7 @@ const StyledInput = styled.input`
   font-size: 2.5vh;
   border-radius: 45px;
   transition: 0.5s ease;
-  margin-bottom: 16px;
+  margin: 24px 0px;
   max-width: 426px;
   width: 100%;
 
