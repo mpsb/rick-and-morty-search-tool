@@ -35,7 +35,7 @@ const GET_CHARACTERS_BY_NAME_AND_STATUS = gql`
   }
 `;
 
-export default function Home({ initialData }) {
+export default function Home() {
   const { dictionary, setUserLanguage } = useContext(LanguageContext);
 
   const [queryResult, setQueryResult] = useState([]);
@@ -79,12 +79,6 @@ export default function Home({ initialData }) {
   function handleFlagClick(event) {
     setUserLanguage(event.target.getAttribute("value"));
   }
-
-  // useEffect for getting initial data after refresh
-  useEffect(() => {
-    setQueryResult(initialData.characters.results);
-    setPaginationOptions(initialData.characters.info);
-  }, [initialData]);
 
   // useEffect for updating list
   useEffect(() => {
@@ -184,32 +178,4 @@ export default function Home({ initialData }) {
       </Flex>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const { data } = await client.query({
-    query: gql`
-      query {
-        characters(page: 1) {
-          results {
-            id
-            name
-            status
-            image
-          }
-          info {
-            count
-            pages
-            next
-          }
-        }
-      }
-    `,
-  });
-
-  return {
-    props: {
-      initialData: data,
-    },
-  };
 }
