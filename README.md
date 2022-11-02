@@ -16,4 +16,4 @@ Please make sure you have the `yarn` package installed in your system. If not, p
 3. Choose the E2E Testing option.
 4. Choose Chrome and click the `Start E2E Testing in Chrome` button.
 5. From there, you will be redirected to Cypress on the browser. Under Specs, click `spec.cy.js` under the `cypress\e2e` folder.
-6. You will no be redirected to the tests, which run automatically.
+6. You will now be redirected to the tests, which run automatically.
