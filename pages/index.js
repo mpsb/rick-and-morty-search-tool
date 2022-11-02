@@ -38,7 +38,7 @@ export default function Home({ initialData }) {
   const [statusToSearch, setStatusToSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { loading, data } = useQuery(GET_CHARACTERS_BY_NAME_AND_STATUS, {
+  const { loading, error, data } = useQuery(GET_CHARACTERS_BY_NAME_AND_STATUS, {
     variables: {
       characterName: nameToSearch,
       status: statusToSearch,
@@ -55,6 +55,7 @@ export default function Home({ initialData }) {
     { value: "unknown", text: dictionary["unknown"] },
   ];
 
+  // functions that handle various interactions
   function handleNameChange(event) {
     setNameToSearch(event.target.value);
   }
@@ -73,13 +74,15 @@ export default function Home({ initialData }) {
     setUserLanguage(event.target.getAttribute("value"));
   }
 
+  // useEffect for getting initial data after refresh
   useEffect(() => {
     setQueryResult(initialData.characters.results);
     setPaginationOptions(initialData.characters.info);
   }, [initialData]);
 
+  // useEffect for updating list
   useEffect(() => {
-    if (loading) return;
+    if (loading || error) return;
     if (page > 1) {
       setQueryResult((queryResult) =>
         queryResult.concat(data?.characters.results)
@@ -89,8 +92,9 @@ export default function Home({ initialData }) {
       setQueryResult(data?.characters.results);
       setPaginationOptions(data?.characters.info);
     }
-  }, [page, data, loading]);
+  }, [page, data, loading, error]);
 
+  // useEffect for resetting the length of the list back to 20
   useEffect(() => {
     setPage(1);
   }, [statusToSearch, nameToSearch]);
